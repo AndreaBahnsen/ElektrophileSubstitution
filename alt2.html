@@ -52,8 +52,7 @@
             padding: 15px;
         }
 
-        /* Tablet und Handy im Hochformat */
-        @media (max-width: 1200px) and (orientation: portrait) {
+        @media (max-width: 1200px) {
             .main-content {
                 grid-template-columns: 1fr;
                 max-height: none;
@@ -65,57 +64,13 @@
                 top: 10px;
                 z-index: 10;
                 margin-bottom: 15px;
-                max-height: 50vh;
-            }
-
-            .mechanism-wrapper {
-                max-height: 50vh;
-                overflow-y: auto;
+                max-height: 40vh;
             }
 
             .sidebar {
                 max-height: none;
                 overflow-y: visible;
             }
-
-            /* Hinweis für Querformat */
-            .orientation-hint {
-                display: block;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                color: white;
-                padding: 10px;
-                text-align: center;
-                font-size: 0.9em;
-                border-radius: 8px;
-                margin-bottom: 10px;
-            }
-        }
-
-        /* Handy und Tablet im Querformat - Desktop-Layout verwenden */
-        @media (max-width: 1200px) and (orientation: landscape) {
-            .main-content {
-                grid-template-columns: 1.2fr 1fr;
-                gap: 10px;
-            }
-
-            .image-container {
-                max-height: calc(100vh - 180px);
-                overflow-y: auto;
-            }
-
-            .sidebar {
-                max-height: calc(100vh - 180px);
-                overflow-y: auto;
-                padding-right: 5px;
-            }
-
-            .orientation-hint {
-                display: none;
-            }
-        }
-
-        .orientation-hint {
-            display: none;
         }
 
         .image-container {
@@ -513,10 +468,6 @@
             <p class="subtitle" id="subtitle">Mechanismus der Halogenierung - Interaktiver Lernpfad</p>
             <p class="subtitle" id="round-indicator" style="font-size: 0.85em; margin-top: 5px;">Runde 1 von 2: Bromierung</p>
         </header>
-
-        <div class="orientation-hint">
-            💡 <strong>Tipp:</strong> Für die beste Darstellung drehe dein Handy ins Querformat! 📱↻
-        </div>
 
         <div class="progress-bar">
             <div class="progress-fill" id="progress"></div>
