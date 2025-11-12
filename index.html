@@ -54,27 +54,43 @@
 
         /* Tablet und Handy (alle Orientierungen) */
         @media (max-width: 1200px) {
+            body {
+                padding: 0;
+            }
+
+            .container {
+                border-radius: 0;
+            }
+
             .main-content {
                 grid-template-columns: 1fr;
                 max-height: none;
                 overflow-y: visible;
+                padding: 0;
+                gap: 0;
             }
 
             .image-container {
-                position: sticky;
+                position: fixed;
                 top: 0;
+                left: 0;
+                right: 0;
                 z-index: 100;
-                margin-bottom: 15px;
+                margin-bottom: 0;
                 background: white;
                 box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                border-radius: 0;
             }
 
             .sidebar {
+                margin-top: 320px; /* Platz für das fixierte Bild - ggf. anpassen */
                 max-height: none;
                 overflow-y: visible;
                 background: white;
                 position: relative;
                 z-index: 1;
+                padding: 15px;
+                min-height: 100vh;
             }
 
             /* Hinweis ausblenden auf mobilen Geräten */
