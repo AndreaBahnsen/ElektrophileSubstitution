@@ -50,13 +50,26 @@
             grid-template-columns: 1fr 400px;
             gap: 15px;
             padding: 15px;
-            max-height: calc(100vh - 200px);
-            overflow-y: auto;
         }
 
         @media (max-width: 1200px) {
             .main-content {
                 grid-template-columns: 1fr;
+                max-height: none;
+                overflow-y: visible;
+            }
+
+            .image-container {
+                position: sticky;
+                top: 10px;
+                z-index: 10;
+                margin-bottom: 15px;
+                max-height: 40vh;
+            }
+
+            .sidebar {
+                max-height: none;
+                overflow-y: visible;
             }
         }
 
@@ -115,6 +128,9 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+            padding-right: 5px;
         }
 
         .info-box {
@@ -252,7 +268,13 @@
             transition: width 0.5s ease-out;
         }
 
-        .btn-next {
+        .navigation-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+        }
+
+        .btn-next, .btn-prev {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
@@ -262,18 +284,27 @@
             cursor: pointer;
             transition: all 0.3s;
             display: none;
+            flex: 1;
         }
 
-        .btn-next.show {
+        .btn-prev {
+            background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+        }
+
+        .btn-next.show, .btn-prev.show {
             display: block;
         }
 
-        .btn-next:hover {
+        .btn-next:hover, .btn-prev:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
-        .btn-next:disabled {
+        .btn-prev:hover {
+            box-shadow: 0 5px 15px rgba(107, 114, 128, 0.4);
+        }
+
+        .btn-next:disabled, .btn-prev:disabled {
             opacity: 0.5;
             cursor: not-allowed;
         }
@@ -477,13 +508,18 @@
                 <div class="info-box active" id="info-1">
                     <h3>Start: Benzol und Brom</h3>
                     <p>Vor dir siehst du oben ein Benzol-Molekül (C₆H₆) und ein Brom-Molekül (Br₂).</p>
-                    <p><strong>Beobachtung:</strong> Benzol reagiert <u>nicht</u> mit Br₂ - weder bei Raumtemperatur noch mit UV-Licht (anders als Alkene!)</p>
+                    <p><strong>Beobachtung im Labor:</strong> Benzol reagiert <u>nicht</u> mit Br₂ - weder bei Raumtemperatur noch mit UV-Licht!</p>
+                    <p><strong>Zum Vergleich:</strong> Alkene (z.B. Ethen) entfärben Bromwasser sofort durch Addition. Benzol tut das nicht - warum?</p>
+                    <p>Die braune Farbe des Broms bleibt erhalten. Erst mit einem speziellen Katalysator wird die Reaktion möglich!</p>
                 </div>
 
                 <div class="info-box" id="info-2">
                     <h3>Warum keine Reaktion?</h3>
-                    <p>Benzol ist außergewöhnlich stabil durch sein <strong>aromatisches System</strong>:</p>
-                    <p>Die 6 π-Elektronen sind über den gesamten Ring <strong>delokalisiert</strong> und bilden eine besonders stabile Elektronenwolke. Diese Aromatizität macht Benzol reaktionsträge gegenüber einfachen Additionen.</p>
+                    <p>Benzol ist außergewöhnlich stabil durch sein <strong>aromatisches System</strong>. Aber was bedeutet das genau?</p>
+                    <p><strong>Die Besonderheit:</strong> Im Benzolring gibt es 6 <i>π</i>-Elektronen (jeweils eines von jedem C-Atom). Diese sind nicht fest zwischen zwei C-Atomen lokalisiert, sondern über den <strong>gesamten Ring delokalisiert</strong> - sie bilden eine "Elektronenwolke" über und unter der Ringebene.</p>
+                    <p><strong>Energetischer Vorteil:</strong> Diese Delokalisierung führt zu einer <strong>Stabilisierungsenergie von ca. 150 kJ/mol</strong> (Resonanzenergie). Das macht Benzol so stabil, dass es sich völlig anders verhält als normale Alkene:</p>
+                    <p>• <strong>Alkene:</strong> reagieren leicht mit Br₂ (auch ohne Katalysator)<br>
+                    • <strong>Benzol:</strong> reagiert NICHT einfach - es "schützt" sein aromatisches System!</p>
                 </div>
 
                 <div class="info-box extra" id="info-2-extra">
@@ -496,58 +532,81 @@
 
                 <div class="info-box" id="info-3">
                     <h3>Der Katalysator: FeBr₃</h3>
-                    <p>Mit FeBr₃ als Katalysator wird die Reaktion möglich!</p>
-                    <p>FeBr₃ ist eine <strong>Lewis-Säure</strong> (Elektronenmangelverbindung).</p>
-                    <p>Der "Bromschleier" beginnt sich zu lichten...</p>
+                    <p>Mit <strong>Eisen(III)-bromid (FeBr₃)</strong> als Katalysator wird die Reaktion möglich!</p>
+                    <p><strong>Was ist eine Lewis-Säure?</strong> FeBr₃ ist eine Elektronenmangelverbindung - das Fe-Atom hat nur 6 Valenzelektronen (3 Bindungen zu Br) statt der angestrebten 8. Deshalb kann es ein Elektronenpaar aufnehmen.</p>
+                    <p><strong>Die Rolle des Katalysators:</strong> FeBr₃ aktiviert das Br₂, indem es die Br-Br-Bindung polarisiert. Dadurch entsteht ein elektrophiles Brom, das den stabilen Benzolring angreifen kann.</p>
+                    <p>Der "Bromschleier" beginnt sich zu lichten - die nächste Reaktionsstufe wird sichtbar!</p>
                 </div>
 
                 <div class="info-box" id="info-4">
                     <h3>Wechselwirkung: Br₂ + FeBr₃</h3>
-                    <p>FeBr₃ <strong>polarisiert</strong> die Br-Br-Bindung durch Wechselwirkung mit einem freien Elektronenpaar des Broms.</p>
-                    <p>Es entsteht ein partiell positives Brom-Atom (Br<sup>δ+</sup>), das als <strong>Elektrophil</strong> wirken kann.</p>
+                    <p><strong>Der entscheidende Schritt:</strong> FeBr₃ nähert sich dem Br₂-Molekül. Eines der Brom-Atome hat freie Elektronenpaare, die das elektronenhungrige Fe-Atom anzieht.</p>
+                    <p><strong>Polarisierung:</strong> Durch diese Wechselwirkung wird die Br-Br-Bindung <strong>polarisiert</strong>. Elektronendichte verschiebt sich zum FeBr₃ hin, sodass entsteht:</p>
+                    <p>• <strong>Br<sup>δ+</sup></strong> (partiell positiv) - wird zum Elektrophil<br>
+                    • <strong>Br<sup>δ-</sup>···FeBr₃</strong> (partiell negativ, gebunden an FeBr₃)</p>
+                    <p><strong>Warum wichtig?</strong> Das Br<sup>δ+</sup> ist jetzt positiv genug, um von der negativ geladenen <i>π</i>-Elektronenwolke des Benzols angezogen zu werden!</p>
                 </div>
 
                 <div class="info-box" id="info-5">
                     <h3>Angriff auf den Benzolring</h3>
-                    <p>Das polarisierte Br<sup>δ+</sup> greift die π-Elektronenwolke des Benzols an.</p>
-                    <p>Die Br-Br-Bindung wird <strong>heterolytisch gespalten</strong>:</p>
-                    <p>Br₂ + FeBr₃ → Br⁺ + [FeBr₄]⁻</p>
+                    <p><strong>Der elektrophile Angriff:</strong> Das polarisierte Br<sup>δ+</sup> greift die <i>π</i>-Elektronenwolke des Benzols an. Die <i>π</i>-Elektronen sind nucleophil (elektronenreich) und werden vom positiven Brom angezogen.</p>
+                    <p><strong>Heterolytische Spaltung:</strong> Im Moment des Angriffs wird die Br-Br-Bindung <strong>heterolytisch gespalten</strong> - beide Bindungselektronen gehen zum einen Brom:</p>
+                    <p style="text-align: center; font-weight: bold;">Br₂ + FeBr₃ → Br⁺ + [FeBr₄]⁻</p>
+                    <p><strong>Wichtig:</strong> Das ist KEINE radikalische Spaltung! Es entsteht ein Br⁺-Ion (Elektrophil) und ein [FeBr₄]⁻-Ion (speichert das zweite Br-Atom).</p>
+                    <p>Das Br⁺ bindet sich an ein C-Atom des Rings - der σ-Komplex entsteht!</p>
                 </div>
 
                 <div class="info-box" id="info-6">
                     <h3>σ-Komplex (Wheland-Komplex)</h3>
-                    <p>Es entsteht ein <strong>positiv geladener σ-Komplex</strong>.</p>
-                    <p>Ein C-Atom wird sp³-hybridisiert und bindet das Br-Atom. Die positive Ladung ist über mehrere C-Atome delokalisiert.</p>
-                    <p>⚠️ Das aromatische System ist in diesem Zwischenprodukt <strong>zerstört</strong>!</p>
+                    <p><strong>Das Zwischenprodukt:</strong> Es entsteht ein <strong>positiv geladener σ-Komplex</strong> (auch Wheland-Komplex oder Arenium-Ion genannt).</p>
+                    <p><strong>Was passiert?</strong> Ein C-Atom des Rings bindet das Br-Atom kovalent (σ-Bindung). Dabei wechselt es von sp²- zu sp³-Hybridisierung - es wird tetraedrisch statt planar!</p>
+                    <p><strong>Die Ladung:</strong> Der Ring trägt jetzt eine positive Ladung (+), die über mehrere C-Atome delokalisiert ist (siehe nächster Schritt).</p>
+                    <p>⚠️ <strong>Wichtig:</strong> Das aromatische System ist in diesem Zwischenprodukt <strong>zerstört</strong>! Das sp³-C unterbricht die durchgängige <i>π</i>-Elektronenwolke. Deshalb ist der σ-Komplex energiereich und instabil - er "will" die Aromatizität zurückgewinnen!</p>
                 </div>
 
                 <div class="info-box" id="info-7">
                     <h3>Mesomere Grenzstrukturen</h3>
-                    <p>Die positive Ladung im σ-Komplex ist <strong>delokalisiert</strong>.</p>
-                    <p>Wir zeichnen mehrere <strong>mesomere Grenzstrukturen</strong>, um zu zeigen, dass die Ladung über mehrere C-Atome verteilt ist.</p>
-                    <p>Diese Strukturen sind keine verschiedenen Moleküle, sondern verschiedene Darstellungen desselben Zustands!</p>
+                    <p><strong>Ladungsverteilung:</strong> Die positive Ladung im σ-Komplex ist <strong>delokalisiert</strong> - sie sitzt nicht fest an einem C-Atom, sondern ist über mehrere verteilt.</p>
+                    <p><strong>Mesomere Grenzstrukturen:</strong> Um diese Delokalisierung zu zeigen, zeichnen wir mehrere <strong>Grenzstrukturen</strong>. Im Bild siehst du drei verschiedene Darstellungen mit der positiven Ladung an unterschiedlichen Positionen.</p>
+                    <p><strong>Wichtig zu verstehen:</strong> Diese Strukturen sind KEINE verschiedenen Moleküle und existieren auch nicht nacheinander! Sie sind verschiedene "Momentaufnahmen" desselben Zustands. Die Realität ist eine <strong>Mischung (Hybrid)</strong> aller Grenzstrukturen - die Ladung ist über alle gezeigten Positionen verteilt.</p>
+                    <p><strong>Warum wichtig?</strong> Diese Delokalisierung stabilisiert den σ-Komplex. Ohne diese Stabilisierung könnte er gar nicht existieren!</p>
                 </div>
 
                 <div class="info-box" id="info-8">
                     <h3>Rearomatisierung</h3>
-                    <p>Abspaltung von <strong>H⁺</strong> führt zur Rearomatisierung.</p>
-                    <p>Das C-Atom wird wieder sp²-hybridisiert, und das <strong>aromatische System wird wiederhergestellt</strong>.</p>
-                    <p>Die Rearomatisierung ist energetisch sehr günstig, weil die Aromatizitätsenergie zurückgewonnen wird!</p>
+                    <p><strong>Der entscheidende Schritt:</strong> Abspaltung von <strong>H⁺</strong> (Proton) vom selben C-Atom, das das Br gebunden hat.</p>
+                    <p><strong>Was passiert?</strong></p>
+                    <p>• Das C-Atom gibt ein H⁺ ab<br>
+                    • Es wechselt zurück von sp³ zu sp² (wird wieder planar)<br>
+                    • Die durchgängige <i>π</i>-Elektronenwolke wird wiederhergestellt<br>
+                    • Das <strong>aromatische System ist zurück!</strong></p>
+                    <p><strong>Energetik:</strong> Die Rearomatisierung ist energetisch <em>extrem günstig</em>, weil ca. 150 kJ/mol Aromatizitätsenergie zurückgewonnen werden! Diese enorme Energiefreisetzung ist der Grund, warum <strong>Substitution</strong> statt Addition stattfindet.</p>
+                    <p><strong>Das H⁺</strong> reagiert mit [FeBr₄]⁻ zu HBr + FeBr₃ (Katalysator-Regenerierung).</p>
                 </div>
 
                 <div class="info-box" id="info-9">
                     <h3>Endprodukt</h3>
-                    <p><strong>Produkte:</strong> Brombenzol + HBr</p>
-                    <p>Der Katalysator FeBr₃ wird regeneriert: [FeBr₄]⁻ + H⁺ → FeBr₃ + HBr</p>
-                    <p><strong>Wichtig:</strong> Es ist eine <em>Substitution</em> (H wird durch Br ersetzt), keine Addition! Das aromatische System bleibt erhalten.</p>
+                    <p><strong>Die Produkte:</strong> Brombenzol (C₆H₅Br) + Bromwasserstoff (HBr)</p>
+                    <p><strong>Katalysator-Regenerierung:</strong> Das [FeBr₄]⁻ reagiert mit dem abgespaltenen H⁺:</p>
+                    <p style="text-align: center; font-weight: bold;">[FeBr₄]⁻ + H⁺ → FeBr₃ + HBr</p>
+                    <p>Der Katalysator FeBr₃ liegt wieder unverändert vor und kann erneut wirken - das ist das Kennzeichen eines echten Katalysators!</p>
+                    <p><strong>Substitution vs. Addition:</strong> Es ist eine <em>Substitution</em> - ein H-Atom wurde durch ein Br-Atom <strong>ersetzt</strong>. Das aromatische System bleibt erhalten, was energetisch viel günstiger ist als eine Addition (bei der die Aromatizität verloren ginge).</p>
+                    <p><strong>Bilanz:</strong> C₆H₆ + Br₂ → C₆H₅Br + HBr (katalysiert durch FeBr₃)</p>
                 </div>
 
                 <div class="info-box" id="info-10">
-                    <h3>Zusammenfassung</h3>
-                    <p>Die <strong>elektrophile Substitution</strong> verläuft in drei Hauptschritten:</p>
-                    <p><strong>1.</strong> Bildung des Elektrophils (Br⁺) durch Katalysator</p>
-                    <p><strong>2.</strong> Angriff auf Benzol → σ-Komplex (Zwischenprodukt)</p>
-                    <p><strong>3.</strong> Rearomatisierung durch H⁺-Abspaltung</p>
+                    <h3>Zusammenfassung: Der Mechanismus der S<sub>E</sub></h3>
+                    <p>Die <strong>elektrophile Substitution (S<sub>E</sub>)</strong> am Benzol verläuft in drei Hauptschritten:</p>
+                    <p><strong>1. Aktivierung des Elektrophils:</strong><br>
+                    FeBr₃ polarisiert Br₂ → Br⁺ + [FeBr₄]⁻<br>
+                    <em>Das Brom wird "scharf gemacht" für den Angriff</em></p>
+                    <p><strong>2. Elektrophiler Angriff:</strong><br>
+                    Br⁺ greift <i>π</i>-Elektronen an → σ-Komplex (positiv geladen)<br>
+                    <em>Aromatizität ist zerstört - energiereiches Zwischenprodukt!</em></p>
+                    <p><strong>3. Rearomatisierung:</strong><br>
+                    H⁺-Abspaltung → Brombenzol + Wiederherstellung der Aromatizität<br>
+                    <em>150 kJ/mol Energie werden frei - deshalb Substitution statt Addition!</em></p>
+                    <p><strong>Schlüsselkonzept:</strong> Die Aromatizität ist so wertvoll, dass Benzol sie um jeden Preis zurückgewinnen will. Das macht Aromaten so besonders!</p>
                     <p>Der "Bromschleier" ist komplett verschwunden - der gesamte Mechanismus ist sichtbar!</p>
                 </div>
 
@@ -555,13 +614,13 @@
                 <div class="question-box" id="question-1">
                     <h3>Frage 1</h3>
                     <p>Warum ist Benzol so stabil und unreaktiv?</p>
-                    <div class="answer-option" data-correct="true">
-                        a) Delokalisierte π-Elektronen bilden ein aromatisches System
+                    <div class="answer-option" data-correct="true" data-feedback-correct="✓ Richtig! Die 6 delokalisierten π-Elektronen bilden eine besonders stabile Elektronenwolke. Diese Aromatizität ist der Schlüssel zur Stabilität!">
+                        a) Delokalisierte <i>π</i>-Elektronen bilden ein aromatisches System
                     </div>
-                    <div class="answer-option" data-correct="false">
+                    <div class="answer-option" data-correct="false" data-feedback="✗ Nein, die Anzahl der H-Atome ist nicht der Grund. Benzol hat genau 6 H-Atome - genauso viele wie C-Atome. Die besondere Stabilität kommt von den delokalisierten π-Elektronen im Ring!">
                         b) Es hat zu viele Wasserstoff-Atome
                     </div>
-                    <div class="answer-option" data-correct="false">
+                    <div class="answer-option" data-correct="false" data-feedback="✗ Die Ringgröße ist nicht das Problem - im Gegenteil, der 6er-Ring ist optimal für Aromatizität! Die Stabilität kommt vom aromatischen π-Elektronensystem mit 6 delokalisierten Elektronen.">
                         c) Der Ring ist zu klein für Reaktionen
                     </div>
                     <div class="feedback"></div>
@@ -570,13 +629,13 @@
                 <div class="question-box" id="question-2">
                     <h3>Frage 2</h3>
                     <p>Was bedeutet "Lewis-Säure"?</p>
-                    <div class="answer-option" data-correct="false">
+                    <div class="answer-option" data-correct="false" data-feedback="✗ Nein, das wäre eine Lewis-Base! Eine Lewis-Säure hat gerade NICHT eine negative Ladung, sondern einen Elektronenmangel und nimmt Elektronen auf.">
                         a) Eine Verbindung mit negativer Ladung
                     </div>
-                    <div class="answer-option" data-correct="true">
+                    <div class="answer-option" data-correct="true" data-feedback-correct="✓ Genau! Lewis-Säuren sind Elektronenpaar-Akzeptoren. FeBr₃ hat nur 6 Valenzelektronen am Fe und kann deshalb ein Elektronenpaar aufnehmen.">
                         b) Ein Elektronenpaar-Akzeptor (nimmt Elektronen auf)
                     </div>
-                    <div class="answer-option" data-correct="false">
+                    <div class="answer-option" data-correct="false" data-feedback="✗ Das wäre eine Brønsted-Säure! Lewis-Säuren arbeiten nicht mit Protonen (H⁺), sondern mit Elektronenpaaren. FeBr₃ nimmt Elektronen auf, gibt aber keine Protonen ab.">
                         c) Eine Verbindung, die Protonen abgibt
                     </div>
                     <div class="feedback"></div>
@@ -585,13 +644,13 @@
                 <div class="question-box" id="question-3">
                     <h3>Frage 3</h3>
                     <p>Was entsteht bei der Wechselwirkung von Br₂ mit FeBr₃?</p>
-                    <div class="answer-option" data-correct="false">
+                    <div class="answer-option" data-correct="false" data-feedback="✗ Nein, es bilden sich keine zwei Br⁻-Ionen. FeBr₃ polarisiert die Br-Br-Bindung, sodass ein Brom-Atom partiell positiv (δ+) wird - perfekt als Elektrophil!">
                         a) Zwei negative Brom-Ionen
                     </div>
-                    <div class="answer-option" data-correct="false">
+                    <div class="answer-option" data-correct="false" data-feedback="✗ Nein, es entstehen keine Radikale! Das wäre eine homolytische Spaltung (z.B. durch UV-Licht). Hier erfolgt eine Polarisierung - das Br wird partiell positiv geladen.">
                         b) Ein Brom-Radikal
                     </div>
-                    <div class="answer-option" data-correct="true">
+                    <div class="answer-option" data-correct="true" data-feedback-correct="✓ Perfekt! FeBr₃ polarisiert die Br-Br-Bindung. Ein Br wird partiell positiv (δ+) und kann als Elektrophil den Benzolring angreifen. Später wird die Bindung komplett gespalten.">
                         c) Ein polarisiertes Br₂-Molekül mit Br<sup>δ+</sup> als Elektrophil
                     </div>
                     <div class="feedback"></div>
@@ -600,13 +659,13 @@
                 <div class="question-box" id="question-4">
                     <h3>Frage 4</h3>
                     <p>Warum wird das aromatische System beim Angriff zunächst zerstört?</p>
-                    <div class="answer-option" data-correct="false">
+                    <div class="answer-option" data-correct="false" data-feedback="✗ Nein, der Ring bleibt geschlossen! Er öffnet sich nicht. Aber ein C-Atom ändert seine Hybridisierung von sp² zu sp³, wodurch die Aromatizität unterbrochen wird.">
                         a) Der Ring öffnet sich
                     </div>
-                    <div class="answer-option" data-correct="true">
+                    <div class="answer-option" data-correct="true" data-feedback-correct="✓ Richtig! Das angegriffene C-Atom wechselt von sp² (flach, Teil des aromatischen Systems) zu sp³ (tetraedrisch). Dadurch wird die durchgängige π-Elektronenwolke unterbrochen - die Aromatizität ist weg!">
                         b) Ein C-Atom wird sp³-hybridisiert und bindet Br kovalent
                     </div>
-                    <div class="answer-option" data-correct="false">
+                    <div class="answer-option" data-correct="false" data-feedback="✗ Die Bindungslängen ändern sich zwar etwas, aber das ist nicht der Hauptgrund. Entscheidend ist die Hybridisierung: Ein sp³-C unterbricht die durchgängige π-Elektronenwolke!">
                         c) Alle Bindungen werden länger
                     </div>
                     <div class="feedback"></div>
@@ -615,13 +674,13 @@
                 <div class="question-box" id="question-5">
                     <h3>Frage 5</h3>
                     <p>Was zeigen die mesomeren Grenzstrukturen?</p>
-                    <div class="answer-option" data-correct="false">
+                    <div class="answer-option" data-correct="false" data-feedback="✗ Nein, es entsteht nur EIN Produkt (Brombenzol)! Die mesomeren Grenzstrukturen beschreiben den ZWISCHENZUSTAND (σ-Komplex), nicht verschiedene Produkte.">
                         a) Es entstehen mehrere verschiedene Produkte
                     </div>
-                    <div class="answer-option" data-correct="true">
+                    <div class="answer-option" data-correct="true" data-feedback-correct="✓ Genau! Die positive Ladung ist nicht fest an einem C-Atom, sondern über mehrere verteilt. Die Grenzstrukturen zeigen verschiedene 'Momentaufnahmen' dieser Delokalisierung - in Wirklichkeit ist die Ladung über alle drei Positionen verteilt.">
                         b) Die Delokalisierung der positiven Ladung über mehrere C-Atome
                     </div>
-                    <div class="answer-option" data-correct="false">
+                    <div class="answer-option" data-correct="false" data-feedback="✗ Nein, die Strukturen existieren nicht nacheinander! Sie sind verschiedene Darstellungsweisen EINES Zustands. Die tatsächliche Struktur ist eine Mischung (Hybrid) aller Grenzstrukturen.">
                         c) Jede Struktur existiert einzeln und nacheinander
                     </div>
                     <div class="feedback"></div>
@@ -630,13 +689,13 @@
                 <div class="question-box" id="question-6">
                     <h3>Frage 6</h3>
                     <p>Warum ist die Rearomatisierung energetisch so günstig?</p>
-                    <div class="answer-option" data-correct="false">
+                    <div class="answer-option" data-correct="false" data-feedback="✗ Der Platzbedarf von Brom spielt keine Rolle. Entscheidend ist die Energetik: Die Rückgewinnung der Aromatizität setzt ca. 150 kJ/mol Energie frei!">
                         a) Brom braucht mehr Platz im Ring
                     </div>
-                    <div class="answer-option" data-correct="false">
+                    <div class="answer-option" data-correct="false" data-feedback="✗ Das H⁺ ist zwar klein, aber das ist nicht der Grund. Die treibende Kraft ist die Wiederherstellung des aromatischen Systems mit seinen 6 delokalisierten π-Elektronen - das setzt viel Energie frei!">
                         b) H⁺ ist sehr reaktiv und will weg
                     </div>
-                    <div class="answer-option" data-correct="true">
+                    <div class="answer-option" data-correct="true" data-feedback-correct="✓ Perfekt! Die Rearomatisierung gewinnt ca. 150 kJ/mol Stabilisierungsenergie zurück. Diese enorme Energiefreisetzung macht die Substitution viel günstiger als die Addition - deshalb bleibt das aromatische System erhalten!">
                         c) Die aromatische Stabilisierungsenergie wird zurückgewonnen
                     </div>
                     <div class="feedback"></div>
@@ -645,13 +704,13 @@
                 <div class="question-box" id="question-7">
                     <h3>Frage 7</h3>
                     <p>Warum heißt es SUBSTITUTION und nicht ADDITION?</p>
-                    <div class="answer-option" data-correct="true">
+                    <div class="answer-option" data-correct="true" data-feedback-correct="✓ Exakt! Bei einer Substitution wird ein Atom ersetzt (H → Br), die Summenformel ändert sich nicht dramatisch. Das aromatische System bleibt erhalten - das ist der große Unterschied zu Alkenen, die Additionen eingehen!">
                         a) H wird durch Br ersetzt, das aromatische System bleibt erhalten
                     </div>
-                    <div class="answer-option" data-correct="false">
+                    <div class="answer-option" data-correct="false" data-feedback="✗ Das wäre eine Addition! Bei der Addition würden BEIDE Br-Atome an den Ring gebunden, und die Aromatizität ginge verloren. Aber genau das passiert NICHT - stattdessen wird H durch Br ersetzt.">
                         b) Br wird einfach zum Benzol hinzugefügt
                     </div>
-                    <div class="answer-option" data-correct="false">
+                    <div class="answer-option" data-correct="false" data-feedback="✗ Nein, es entsteht nur EIN Hauptprodukt (Brombenzol + HBr). Die Bezeichnung 'Substitution' bedeutet, dass ein Atom (H) durch ein anderes (Br) ersetzt wird.">
                         c) Es entstehen zwei verschiedene Produkte
                     </div>
                     <div class="feedback"></div>
@@ -660,13 +719,13 @@
                 <div class="question-box" id="question-8">
                     <h3>Frage 8</h3>
                     <p>Was passiert mit dem Katalysator FeBr₃?</p>
-                    <div class="answer-option" data-correct="false">
+                    <div class="answer-option" data-correct="false" data-feedback="✗ Nein, FeBr₃ zerfällt nicht! Das ist ja der Sinn eines Katalysators - er nimmt an der Reaktion teil, wird aber am Ende wieder zurückgebildet und kann erneut wirken.">
                         a) Er zerfällt zu Fe und Br
                     </div>
-                    <div class="answer-option" data-correct="true">
+                    <div class="answer-option" data-correct="true" data-feedback-correct="✓ Richtig! Das ist typisch für einen Katalysator: Er wird zwischenzeitlich zu [FeBr₄]⁻ umgewandelt, reagiert dann aber mit H⁺ zurück zu FeBr₃ + HBr. Der Katalysator liegt am Ende wieder unverändert vor!">
                         b) Er wird am Ende regeneriert und bleibt unverändert
                     </div>
-                    <div class="answer-option" data-correct="false">
+                    <div class="answer-option" data-correct="false" data-feedback="✗ Nein, FeBr₃ erscheint nicht im Produkt! Das Produkt ist Brombenzol (C₆H₅Br) + HBr. Der Katalysator wird regeneriert und steht für weitere Reaktionen zur Verfügung.">
                         c) Er wird im Produkt eingebaut
                     </div>
                     <div class="feedback"></div>
@@ -675,13 +734,13 @@
                 <div class="question-box" id="question-9">
                     <h3>Frage 9</h3>
                     <p>Was ist das energiereichste Zwischenprodukt?</p>
-                    <div class="answer-option" data-correct="false">
+                    <div class="answer-option" data-correct="false" data-feedback="✗ Nein, Brombenzol ist das ENDPRODUKT und energieärmer als die Ausgangsstoffe. Das energiereichste Intermediat liegt auf dem WEG zum Produkt!">
                         a) Das Brombenzol
                     </div>
-                    <div class="answer-option" data-correct="false">
+                    <div class="answer-option" data-correct="false" data-feedback="✗ Der Übergangszustand bei der H⁺-Abspaltung hat zwar eine hohe Energie, aber der σ-Komplex selbst (als Intermediat, nicht Übergangszustand) ist noch energiereicher - er ist das 'Tal' im Energiediagramm.">
                         b) Der Übergangszustand bei der H⁺-Abspaltung
                     </div>
-                    <div class="answer-option" data-correct="true">
+                    <div class="answer-option" data-correct="true" data-feedback-correct="✓ Genau! Der σ-Komplex (Wheland-Komplex) ist das energiereichste Intermediat, weil hier die Aromatizität zerstört ist. Er liegt im Energiediagramm am höchsten - deshalb ist seine Bildung der geschwindigkeitsbestimmende Schritt!">
                         c) Der σ-Komplex (Wheland-Komplex)
                     </div>
                     <div class="feedback"></div>
@@ -690,13 +749,13 @@
                 <div class="question-box" id="question-10">
                     <h3>Abschlussfrage</h3>
                     <p>Welche Aussage trifft auf die Gesamtreaktion zu?</p>
-                    <div class="answer-option" data-correct="false">
+                    <div class="answer-option" data-correct="false" data-feedback="✗ Nein, es ist KEINE Addition! Bei einer Addition würde die Aromatizität zerstört bleiben. Aber genau das wäre energetisch sehr ungünstig - deshalb findet Substitution statt.">
                         a) Es ist eine Addition, das Benzol wird aufgebrochen
                     </div>
-                    <div class="answer-option" data-correct="true">
+                    <div class="answer-option" data-correct="true" data-feedback-correct="✓ Perfekt! Zusammenfassung: H wird durch Br ersetzt (Substitution), die Aromatizität wird wiederhergestellt, ca. 150 kJ/mol werden frei. Das ist der Schlüssel zum Verständnis der Aromatenchemie!">
                         b) Es ist eine Substitution, bei der die Aromatizität erhalten bleibt
                     </div>
-                    <div class="answer-option" data-correct="false">
+                    <div class="answer-option" data-correct="false" data-feedback="✗ Eine Eliminierung wäre z.B. die Abspaltung von HBr aus einem Halogenalkan. Hier wird aber H durch Br ERSETZT - das ist eine Substitution, keine Eliminierung!">
                         c) Es ist eine Eliminierung von Wasserstoff
                     </div>
                     <div class="feedback"></div>
@@ -735,7 +794,7 @@
                 <div class="info-box" id="info-r2-5">
                     <h3>Bildung des σ-Komplexes</h3>
                     <p>Der elektrophile Angriff erfolgt analog: Cl₂ + FeCl₃ → Cl⁺ + [FeCl₄]⁻</p>
-                    <p>Das Cl⁺-Ion (bzw. hochpolarisiertes Cl) greift die π-Elektronenwolke an.</p>
+                    <p>Das Cl⁺-Ion (bzw. hochpolarisiertes Cl) greift die <i>π</i>-Elektronenwolke an.</p>
                     <p>Es bildet sich der kationische σ-Komplex mit gebundenem Chlor.</p>
                 </div>
 
@@ -926,7 +985,10 @@
                     <div class="feedback"></div>
                 </div>
 
-                <button class="btn-next" id="btn-next">Weiter →</button>
+                <div class="navigation-buttons">
+                    <button class="btn-prev" id="btn-prev">← Zurück</button>
+                    <button class="btn-next" id="btn-next">Weiter →</button>
+                </div>
             </div>
         </div>
     </div>
@@ -978,6 +1040,8 @@
             updateProgress();
             setupQuestionListeners();
             document.getElementById('btn-next').addEventListener('click', nextStep);
+            document.getElementById('btn-prev').addEventListener('click', previousStep);
+            updateNavigationButtons();
         }
 
         // Runde starten (wird auch für Runde 2 verwendet)
@@ -1014,8 +1078,9 @@
             // Fortschritt aktualisieren
             updateProgress();
 
-            // Weiter-Button verstecken
+            // Navigation-Buttons zurücksetzen
             document.getElementById('btn-next').classList.remove('show');
+            updateNavigationButtons();
 
             // Erste Info und Frage anzeigen
             setTimeout(() => {
@@ -1076,7 +1141,8 @@
                     // Markiere richtig/falsch
                     if (isCorrect) {
                         this.classList.add('correct');
-                        feedback.textContent = '✓ Richtig! Sehr gut!';
+                        const correctFeedback = this.dataset.feedbackCorrect || '✓ Richtig! Sehr gut!';
+                        feedback.textContent = correctFeedback;
                         feedback.className = 'feedback show correct';
 
                         // Zeige "Weiter"-Button
@@ -1085,18 +1151,80 @@
                         }, 500);
                     } else {
                         this.classList.add('wrong');
-                        feedback.textContent = '✗ Nicht ganz. Überlege noch einmal...';
+                        const wrongFeedback = this.dataset.feedback || '✗ Nicht ganz. Überlege noch einmal...';
+                        feedback.textContent = wrongFeedback;
                         feedback.className = 'feedback show wrong';
 
-                        // Nach 2 Sekunden wieder aktivieren
+                        // Nach 3 Sekunden wieder aktivieren (mehr Zeit zum Lesen)
                         setTimeout(() => {
                             allOptions.forEach(opt => opt.classList.remove('disabled'));
                             this.classList.remove('wrong');
                             feedback.classList.remove('show');
-                        }, 2000);
+                        }, 3500);
                     }
                 });
             });
+        }
+
+        // Navigation-Buttons aktualisieren
+        function updateNavigationButtons() {
+            const btnPrev = document.getElementById('btn-prev');
+            const btnNext = document.getElementById('btn-next');
+
+            // Zurück-Button nur anzeigen, wenn nicht beim ersten Schritt
+            if (currentStep > 1) {
+                btnPrev.classList.add('show');
+            } else {
+                btnPrev.classList.remove('show');
+            }
+        }
+
+        // Vorheriger Schritt
+        function previousStep() {
+            if (currentStep <= 1) return;
+
+            // Overlay wieder sichtbar machen, falls es im aktuellen Schritt ausgeblendet wurde
+            if (overlaySteps[currentStep]) {
+                const config = rounds[currentRound];
+                const overlayId = config.overlayPrefix + overlaySteps[currentStep];
+                const overlay = document.getElementById(overlayId);
+                if (overlay) {
+                    overlay.classList.remove('fade-out');
+                }
+            }
+
+            currentStep--;
+            updateProgress();
+
+            // Legende wieder anzeigen, wenn wir zu Schritt 1 zurückkehren
+            if (currentStep === 1) {
+                const legend = document.getElementById('legend-hint');
+                if (legend) {
+                    legend.style.display = 'block';
+                }
+            }
+
+            // Verstecke aktuelle Info und Frage
+            document.querySelectorAll('.info-box.active, .question-box.active').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            // Setze alle Fragen zurück
+            document.querySelectorAll('.answer-option').forEach(opt => {
+                opt.classList.remove('correct', 'wrong', 'disabled');
+            });
+            document.querySelectorAll('.feedback').forEach(fb => {
+                fb.classList.remove('show');
+            });
+
+            // Zeige vorherige Info und Frage
+            showCurrentContent();
+
+            // Verstecke "Weiter"-Button
+            document.getElementById('btn-next').classList.remove('show');
+
+            // Aktualisiere Navigation-Buttons
+            updateNavigationButtons();
         }
 
         // Nächster Schritt
@@ -1145,6 +1273,9 @@
 
             // Verstecke "Weiter"-Button
             document.getElementById('btn-next').classList.remove('show');
+
+            // Aktualisiere Navigation-Buttons
+            updateNavigationButtons();
         }
 
         // Abschluss
