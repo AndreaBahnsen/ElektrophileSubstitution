@@ -61,13 +61,20 @@
             }
 
             .image-container {
-                position: relative;
+                position: sticky;
+                top: 0;
+                z-index: 100;
                 margin-bottom: 15px;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             }
 
             .sidebar {
                 max-height: none;
                 overflow-y: visible;
+                background: white;
+                position: relative;
+                z-index: 1;
             }
 
             /* Hinweis ausblenden auf mobilen Geräten */
