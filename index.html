@@ -56,41 +56,68 @@
         @media (max-width: 1200px) {
             body {
                 padding: 0;
+                overflow: hidden;
+                height: 100vh;
             }
 
             .container {
                 border-radius: 0;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+
+            header {
+                flex-shrink: 0;
+            }
+
+            .progress-bar {
+                flex-shrink: 0;
+                margin: 10px 15px;
             }
 
             .main-content {
-                grid-template-columns: 1fr;
-                max-height: none;
-                overflow-y: visible;
+                display: flex;
+                flex-direction: column;
+                height: 100%;
                 padding: 0;
                 gap: 0;
+                overflow: hidden;
             }
 
             .image-container {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                z-index: 100;
-                margin-bottom: 0;
+                flex-shrink: 0;
+                height: 40vh; /* Obere Hälfte: 40% des Bildschirms für das Bild */
                 background: white;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
                 border-radius: 0;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .image-container .mechanism-wrapper {
+                height: 100%;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .image-container #mechanism-image {
+                max-height: 100%;
+                width: auto;
+                object-fit: contain;
             }
 
             .sidebar {
-                margin-top: 320px; /* Platz für das fixierte Bild - ggf. anpassen */
-                max-height: none;
-                overflow-y: visible;
+                flex: 1;
+                overflow-y: auto;
+                overflow-x: hidden;
+                -webkit-overflow-scrolling: touch;
                 background: white;
-                position: relative;
-                z-index: 1;
                 padding: 15px;
-                min-height: 100vh;
+                border-top: 2px solid #e0e0e0;
             }
 
             /* Hinweis ausblenden auf mobilen Geräten */
